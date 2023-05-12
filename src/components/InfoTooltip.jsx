@@ -1,5 +1,4 @@
 import React from "react";
-import closeIcon from "../images/close-icon.svg";
 import success from "../images/success.svg";
 import fail from "../images/fail.svg";
 function InfoTooltip({ onClose, isOpen, signedIn }) {
