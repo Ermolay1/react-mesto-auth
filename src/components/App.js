@@ -35,7 +35,6 @@ function App() {
   const [headerEmail, setHeaderEmail] = useState("");
   const [isLoadingUpdateUser, setIsLoadingUpdateUser] = useState(false);
   const [isInfoTolltipSuccess, setIsInfoTolltipSuccess] = useState(false);
-  const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [signedIn, setSignedIn] = useState(true);
 
   useEffect(() => {
@@ -98,7 +97,7 @@ function App() {
   const [isLoadingDeleteCard, setIsLoadingDeleteCard] = useState(false);
   const [isLoadingNewCard, setIsLoadingNewCard] = useState(false);
   const [isLoadingUpdateAvatar, setIsLoadingUpdateAvatar] = useState(false);
-   
+
   function handleUpdateUser(data) {
     console.log("dssd");
     setIsLoadingUpdateUser(true);
@@ -188,7 +187,6 @@ function App() {
       });
   }
 
-
   function handleRegisterUser(email, password) {
     authApi
       .registerUser(email, password)
@@ -203,7 +201,7 @@ function App() {
         showTooltipResponse(false);
         console.log(err);
       })
-      .finally(() => setIsSuccessPopupOpen(true));
+      .finally(() => isInfoTolltipSuccess(true));
   }
 
   function handleAuthUser(email, password) {
@@ -219,7 +217,7 @@ function App() {
       })
       .catch((err) => {
         setIsInfoTolltipSuccess(false);
-        setIsSuccessPopupOpen(true);
+        setIsInfoTolltipSuccess(true);
         console.log(err);
       });
   }
@@ -311,13 +309,12 @@ function App() {
             card={selectedCard}
             onClose={setIsImagePopupOpen}
           />
-           <InfoTooltip
+          <InfoTooltip
             name={"success"}
             onClose={closeAllPopups}
             isOpen={isInfoTolltipSuccess}
             signedIn={signedIn}
           />
-      
         </div>
       </CurrentUserContext.Provider>
     </div>

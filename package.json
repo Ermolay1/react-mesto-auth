@@ -2,7 +2,7 @@
   "name": "react-mesto-auth",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Ermolay1.github.io/mesto-react/",
+  "homepage": "https://ermolay1.github.io/react-mesto-auth/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
