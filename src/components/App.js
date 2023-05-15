@@ -35,35 +35,36 @@ function App() {
   const [headerEmail, setHeaderEmail] = useState("");
   const [isLoadingUpdateUser, setIsLoadingUpdateUser] = useState(false);
   const [isInfoTolltipSuccess, setIsInfoTolltipSuccess] = useState(false);
+  const [isInfoTolltipFail, setIsInfotolltipFail] = useState(false);
   const [signedIn, setSignedIn] = useState(true);
 
   useEffect(() => {
-    if (isLoggedIn === true) {
-      navigate('/');
+    if (isLoggedIn) {
+      navigate("/");
+      api
+        .getAllCardWhithUser()
+        .then(([cards, user]) => {
+          setCards(cards);
+          setCurrentUser(user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    api
-      .getAllCardWhithUser()
-      .then(([cards, user]) => {
-        setCards(cards);
-        setCurrentUser(user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }, [isLoggedIn, navigate]);
 
   useEffect(() => {
-    if (isLoggedIn === true) {
+    if (isLoggedIn) {
       navigate("/");
+      api
+        .getUserInfo()
+        .then((user) => {
+          setCurrentUser(user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    api
-      .getUserInfo()
-      .then((user) => {
-        setCurrentUser(user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }, [isLoggedIn, navigate]);
 
   function showTooltipResponse(signedIn) {
@@ -97,6 +98,7 @@ function App() {
     if (isEditAvatarPopupOpen) setIsEditAvatarPopupOpen(false);
     if (isImagePopupOpen) setIsImagePopupOpen(false);
     if (isDeletePopupOpen) setIsDeletePopupOpen(false);
+    if (isInfoTolltipFail) setIsInfotolltipFail(false);
     if (isInfoTolltipSuccess) setIsInfoTolltipSuccess(false);
   }
 
@@ -161,8 +163,6 @@ function App() {
       });
   }
 
-  
-
   function handleUpdateAvatar(userAvatarLink) {
     setIsLoadingUpdateAvatar(true);
     api
@@ -208,7 +208,6 @@ function App() {
         }
       })
       .catch((err) => {
-        setIsInfoTolltipSuccess(false);
         setIsInfoTolltipSuccess(true);
         console.log(err);
       });
