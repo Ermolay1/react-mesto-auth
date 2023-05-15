@@ -9,7 +9,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
 import NewCardPopup from "./NewCardPopup";
 import DeleteCardPopup from "./DeleteCardPopup";
-import { useNavigate, Route, Routes, useHistory } from "react-router-dom";
+import { useNavigate, Route, Routes } from "react-router-dom";
 import authApi from "../utils/AuthApi";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
@@ -38,6 +38,7 @@ function App() {
   const [signedIn, setSignedIn] = useState(true);
 
   useEffect(() => {
+    isLoggedIn &&
     api
       .getAllCardWhithUser()
       .then(([cards, user]) => {
@@ -47,9 +48,10 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
+    isLoggedIn &&
     api
       .getUserInfo()
       .then((user) => {
@@ -58,7 +60,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [isLoggedIn]);
 
   function showTooltipResponse(signedIn) {
     setIsInfoTolltipSuccess(true);
@@ -155,21 +157,7 @@ function App() {
       });
   }
 
-  function handleUpdateUser(user) {
-    setIsLoadingUpdateUser(true);
-    api
-      .editUserInfo({ item: user })
-      .then((newUser) => {
-        setCurrentUser(newUser);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoadingUpdateUser(false);
-      });
-    closeAllPopups();
-  }
+  
 
   function handleUpdateAvatar(userAvatarLink) {
     setIsLoadingUpdateAvatar(true);
