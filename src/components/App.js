@@ -38,7 +38,9 @@ function App() {
   const [signedIn, setSignedIn] = useState(true);
 
   useEffect(() => {
-    isLoggedIn &&
+    if (isLoggedIn === true) {
+      navigate('/');
+    }
     api
       .getAllCardWhithUser()
       .then(([cards, user]) => {
@@ -48,10 +50,12 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   useEffect(() => {
-    isLoggedIn &&
+    if (isLoggedIn === true) {
+      navigate("/");
+    }
     api
       .getUserInfo()
       .then((user) => {
@@ -60,7 +64,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   function showTooltipResponse(signedIn) {
     setIsInfoTolltipSuccess(true);
