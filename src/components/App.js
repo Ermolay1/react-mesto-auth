@@ -208,11 +208,10 @@ function App() {
         }
       })
       .catch((err) => {
+        showTooltipResponse(false);
         setIsInfoTolltipSuccess(true);
         console.log(err);
       });
-      
-      
   }
 
   useEffect(() => {
