@@ -36,7 +36,7 @@ function App() {
   const [isLoadingUpdateUser, setIsLoadingUpdateUser] = useState(false);
   const [isInfoTolltipSuccess, setIsInfoTolltipSuccess] = useState(false);
   const [isInfoTolltipFail, setIsInfotolltipFail] = useState(false);
-  const [signedIn, setSignedIn] = useState(true);
+  const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -211,6 +211,8 @@ function App() {
         setIsInfoTolltipSuccess(true);
         console.log(err);
       });
+      
+      
   }
 
   useEffect(() => {
